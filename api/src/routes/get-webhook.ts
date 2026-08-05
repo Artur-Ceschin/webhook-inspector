@@ -38,10 +38,7 @@ export const getWebhook: FastifyPluginAsyncZod = async (app) => {
       }
 
       const webhook = result[0];
-      return reply.send({
-        ...webhook,
-        body: webhook.body ? JSON.parse(webhook.body) : null,
-      });
+      return reply.send(webhook);
     },
   );
 };

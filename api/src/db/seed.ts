@@ -2,7 +2,6 @@ import { db } from "@/db/index";
 import { webhooks } from "@/db/schema/webhooks";
 
 const TOTAL = 60;
-const METHODS = ["POST"];
 const ENDPOINTS = ["/stripe", "/webhooks/stripe", "/billing/stripe"];
 const STRIPE_IPS = ["52.15.183.7", "54.88.130.119", "54.187.174.169"];
 const STATUSES = [200, 201, 400, 404, 500];
@@ -29,17 +28,21 @@ async function seed() {
 
     const eventType =
       EVENT_TYPES[Math.floor(Math.random() * EVENT_TYPES.length)];
-    const body = JSON.stringify({
-      id: `evt_${Math.random().toString(36).slice(2, 9)}`,
-      type: eventType,
-      created: Math.floor(createdAt.getTime() / 1000),
-      data: {
-        object: {
-          id: `obj_${Math.random().toString(36).slice(2, 9)}`,
-          type: eventType.split(".")[0],
+    const body = JSON.stringify(
+      {
+        id: `evt_${Math.random().toString(36).slice(2, 9)}`,
+        type: eventType,
+        created: Math.floor(createdAt.getTime() / 1000),
+        data: {
+          object: {
+            id: `obj_${Math.random().toString(36).slice(2, 9)}`,
+            type: eventType.split(".")[0],
+          },
         },
       },
-    });
+      null,
+      2,
+    );
 
     return {
       method: "POST",
