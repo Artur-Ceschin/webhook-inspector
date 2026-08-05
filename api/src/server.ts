@@ -10,8 +10,11 @@ import {
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifyCors } from "@fastify/cors";
 import ScalarApiReference from "@scalar/fastify-api-reference";
-import { listWebHooks } from "./routes/listWebHooks";
 import { env } from "./env";
+import { getWebhook } from "./routes/get-webhook";
+import { deleteWebhook } from "./routes/delete-webhook";
+import { captureWebHook } from "./routes/capture-webhook";
+import { listWebHooks } from "./routes/listWebHooks";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -39,7 +42,11 @@ app.register(ScalarApiReference, {
   routePrefix: "/docs",
 });
 
+app.register(getWebhook);
 app.register(listWebHooks);
+app.register(deleteWebhook);
+app.register(captureWebHook);
+
 // app.serializerCompiler;
 
 app.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {

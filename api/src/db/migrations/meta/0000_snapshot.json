@@ -39,8 +39,8 @@
           "notNull": true,
           "default": 200
         },
-        "current_type": {
-          "name": "current_type",
+        "content_type": {
+          "name": "content_type",
           "type": "text",
           "primaryKey": false,
           "notNull": false
