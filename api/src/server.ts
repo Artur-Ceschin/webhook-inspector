@@ -15,6 +15,7 @@ import { getWebhook } from "./routes/get-webhook";
 import { deleteWebhook } from "./routes/delete-webhook";
 import { captureWebHook } from "./routes/capture-webhook";
 import { listWebHooks } from "./routes/listWebHooks";
+import { generateHandler } from "./routes/generate-handler";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -46,6 +47,7 @@ app.register(getWebhook);
 app.register(listWebHooks);
 app.register(deleteWebhook);
 app.register(captureWebHook);
+app.register(generateHandler);
 
 // app.serializerCompiler;
 
